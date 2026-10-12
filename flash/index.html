@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add HackerComms</title>
+  <meta name="description" content="Add the HackerComms channel to your Meshtastic radio without touching your existing channels.">
+  <meta name="theme-color" content="#070707">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700;800&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/theme.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../"><span class="prompt">~$</span>HackerComms<span class="cursor" aria-hidden="true"></span></a>
+    <nav class="nav" aria-label="Main">
+      <a class="nav-hide" href="../#channel">channel</a>
+      <a class="nav-hide" href="../#notes">notes</a>
+      <a class="nav-cta" href="./" aria-current="page">flash</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">flash.sh</span><h2>Add to radio</h2></div>
+      <p class="muted" style="max-width:40em">Connect your Meshtastic radio. This page reads its channel slots, puts HackerComms in the first empty one, and leaves every other channel and setting alone. Nothing is sent anywhere but your radio.</p>
+
+      <div id="unsupported" class="banner" hidden>This browser can't talk to radios directly. Use Chrome or Edge on a laptop, or scan the code below with the Meshtastic phone app.</div>
+
+      <div class="flash-grid" style="margin-top:24px">
+        <div class="console">
+          <div class="console-head">/dev/radio <span class="status" id="status">Idle</span></div>
+          <div class="console-body">
+            <div class="connect-row">
+              <button class="btn btn-primary" id="connect-serial">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2v14M8 6l4-4 4 4M7 12h10v4a5 5 0 0 1-10 0v-4Z"/></svg>
+                USB
+              </button>
+              <button class="btn" id="connect-ble">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m7 7 10 10-5 5V2l5 5L7 17"/></svg>
+                Bluetooth
+              </button>
+            </div>
+            <div class="device-id" id="device"></div>
+            <ul class="slots" id="slots">
+              <li class="slots-empty-msg">Channel slots appear here after you connect.</li>
+            </ul>
+            <div class="plan" id="plan" hidden>
+              <p id="plan-text"></p>
+              <button class="btn btn-primary" id="write" hidden>Add <span class="keep-case">HackerComms</span></button>
+              <button class="btn" id="disconnect" hidden>Disconnect</button>
+            </div>
+          </div>
+          <div class="log" id="log" aria-live="polite"></div>
+        </div>
+
+        <div style="display:grid;gap:24px;align-content:start">
+          <div class="tag-plate">
+            <div class="tag-head"><span>write.plan</span><span>one slot only</span></div>
+            <div class="tag-row"><span class="tag-k">name</span><span class="tag-v big">HackerComms</span><span></span></div>
+            <div class="tag-row"><span class="tag-k">psk</span><span class="tag-v">6IzsaoVhx1ETWeWuu0dUWMLqItvYJLbRzwgTAKCfvtY=</span><span></span></div>
+            <div class="tag-row"><span class="tag-k">role</span><span class="tag-v">secondary <span class="cmt"># first empty slot</span></span><span></span></div>
+            <div class="tag-row"><span class="tag-k">untouched</span><span class="tag-v">Primary channel, other channels, LoRa &amp; device config</span><span></span></div>
+          </div>
+
+          <div class="tag-plate">
+            <div class="tag-head"><span>phone.txt</span><span>Meshtastic app</span></div>
+            <div style="padding:20px" class="qr-card">
+              <div class="qr" id="qr" aria-label="QR code that adds HackerComms"></div>
+              <div>
+                <p style="margin:0 0 8px">Scan with the Meshtastic app. This link is in <strong>add</strong> mode, so recent app versions append the channel instead of replacing yours — check the app's prompt before you confirm.</p>
+                <a class="url-box" id="add-url" href="#"></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="note">
+            <h3>Troubleshooting</h3>
+            <p>No port listed? Install your board's USB driver (CP210x or CH9102) and close the Meshtastic app or any serial monitor using the port. Bluetooth asks for the PIN shown on the radio's screen (default 123456 on boards without one).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>HackerComms flasher · runs entirely in your browser</span>
+    <span>Not affiliated with Meshtastic® · <a href="https://meshtastic.org">meshtastic.org</a></span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="../assets/js/site.js" defer></script>
+<script type="module" src="../assets/js/flasher.js"></script>
+</body>
+</html>

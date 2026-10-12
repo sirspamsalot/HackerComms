@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HackerComms</title>
+  <meta name="description" content="A common Meshtastic channel for hackers at cons, camps and meetups.">
+  <meta name="theme-color" content="#070707">
+  <meta property="og:title" content="HackerComms">
+  <meta property="og:description" content="A common Meshtastic channel for hackers at cons, camps and meetups.">
+  <meta property="og:url" content="https://hackercomms.com/">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700;800&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/theme.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="./"><span class="prompt">~$</span>HackerComms<span class="cursor" aria-hidden="true"></span></a>
+    <nav class="nav" aria-label="Main">
+      <a class="nav-hide" href="#channel">channel</a>
+      <a class="nav-hide" href="#notes">notes</a>
+      <a class="nav-cta" href="flash/">flash</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <svg class="hero-mesh" aria-hidden="true"></svg>
+    <div class="wrap">
+      <div class="shell" aria-label="Meshtastic CLI commands that add HackerComms">
+        <div class="line"><span class="ps1">hacker@mesh:~$</span><span class="cmd" data-typed>meshtastic --ch-add HackerComms</span></div>
+        <div class="line"><span class="ps1">hacker@mesh:~$</span><span class="cmd" data-typed>meshtastic --ch-index 1 --ch-set psk base64:6IzsaoVhx1ETWeWuu0dUWMLqItvYJLbRzwgTAKCfvtY=</span></div>
+        <div class="out" id="typed-out"># use the slot number --ch-add picked (check with meshtastic --info)</div>
+      </div>
+      <h1>Hacker<br><span class="hl">Comms</span><span class="cursor" aria-hidden="true"></span></h1>
+      <p class="lede">A common Meshtastic channel for hackers at cons, camps and meetups. <strong>Load it once, find your people anywhere</strong>, without crowding the default channel.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="flash/">Add to my radio</a>
+        <a class="btn" href="#channel">Manual setup</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="channel">
+    <div class="wrap split">
+      <div>
+        <div class="sec-head"><span class="sec-num">channel.conf</span><h2>The channel</h2></div>
+        <p><span class="keep-case">HackerComms</span> rides alongside whatever you already run. It goes into a spare <strong>secondary</strong> slot, so your primary channel, your private group channels and your radio settings stay put.</p>
+        <p class="muted">The web flasher does it in about ten seconds over USB or Bluetooth. Prefer to do it by hand? Every value you need is in the config.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="flash/">Open the flasher</a>
+        </div>
+      </div>
+
+      <div class="tag-plate" role="group" aria-label="Channel settings">
+        <div class="tag-head"><span>hackercomms.conf</span><span>-rw-r--r--</span></div>
+        <div class="tag-row">
+          <span class="tag-k">name</span>
+          <span class="tag-v big">HackerComms</span>
+          <button class="copy" data-copy="HackerComms">Copy</button>
+        </div>
+        <div class="tag-row">
+          <span class="tag-k">psk</span>
+          <span class="tag-v" id="psk">6IzsaoVhx1ETWeWuu0dUWMLqItvYJLbRzwgTAKCfvtY=</span>
+          <button class="copy" data-copy-from="#psk">Copy</button>
+        </div>
+        <div class="tag-row">
+          <span class="tag-k">crypto</span>
+          <span class="tag-v">AES-256 <span class="cmt"># 32-byte key</span></span>
+          <span></span>
+        </div>
+        <div class="tag-row">
+          <span class="tag-k">role</span>
+          <span class="tag-v">secondary <span class="cmt"># any free slot 1–7</span></span>
+          <span></span>
+        </div>
+        <div class="tag-row">
+          <span class="tag-k">preset</span>
+          <span class="tag-v">LongFast <span class="cmt"># your region's default</span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">install</span><h2>Get on the net</h2></div>
+      <ol class="steps">
+        <li><span class="step-n">1</span><h3>Plug in</h3><p>Connect your radio by USB, or have Bluetooth ready. Chrome or Edge on a laptop works best.</p></li>
+        <li><span class="step-n">2</span><h3>Read slots</h3><p>The flasher reads your eight channel slots and shows you exactly where <span class="keep-case">HackerComms</span> will land.</p></li>
+        <li><span class="step-n">3</span><h3>Add &amp; verify</h3><p>One click writes the channel to the first empty slot, then reads it back to confirm.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="notes">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">README</span><h2>Notes</h2></div>
+      <div class="notes">
+        <div class="note hot"><h3>The key is public</h3><p>It's published right here, so treat <span class="keep-case">HackerComms</span> like a public frequency. Use your own channel for anything private.</p></div>
+        <div class="note"><h3>Match your radio settings</h3><p>Secondary channels share the primary channel's frequency and preset. Stick with your region's default LongFast to hear everyone.</p></div>
+        <div class="note"><h3>Be a good neighbor</h3><p>Big events mean busy airtime. Keep messages short and turn down position broadcasts on this channel.</p></div>
+        <div class="note"><h3>Already full?</h3><p>Meshtastic radios hold eight channels. If every slot is taken, free one in the app first. The flasher will never overwrite one.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>HackerComms · a Meshtastic channel for hackers</span>
+    <span>Not affiliated with Meshtastic® · <a href="https://meshtastic.org">meshtastic.org</a></span>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>
